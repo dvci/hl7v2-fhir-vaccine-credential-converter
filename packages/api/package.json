@@ -22,7 +22,8 @@
     "pino": "^6.11.0",
     "swagger-ui-express": "^4.1.6",
     "tsoa": "^3.5.2",
-    "@dvci-converter/lib": "*"
+    "@dvci-converter/lib": "*",
+    "@ahryman40k/ts-fhir-types": "^4.0.34"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",

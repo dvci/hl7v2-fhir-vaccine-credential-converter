@@ -5,18 +5,24 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "compile": "tsc --build ./tsconfig.json",
+    "compile": "npm run clean && tsc --build ./tsconfig.json && copyfiles -u 1 src/templates/** dist/",
     "lint": "eslint -c .eslintrc.js \"{server, test}/**/*.{js,ts,tsx}\" --quiet",
     "lint:fix": "eslint -c .eslintrc.js \"{server, test}/**/*.{js,ts,tsx}\" --quiet --fix"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@ahryman40k/ts-fhir-types": "^4.0.34",
+    "@dotbase/hl7-v2-message": "^1.0.1",
+    "@redoxengine/redox-hl7-v2": "^1.0.1",
+    "liquidjs": "^9.22.1"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
-    "@types/node": "^14.14.22",
+    "@types/node": "^14.14.25",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "chai": "^4.2.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",

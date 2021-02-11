@@ -1,3 +1,18 @@
+import { v2_5 } from "@dotbase/hl7-v2-message"
+import { Liquid, Template } from 'liquidjs';
+import { R4 } from  '@ahryman40k/ts-fhir-types'
+import * as E from "fp-ts/lib/Either";
+
+const hl7v2 = require("@redoxengine/redox-hl7-v2");
+const path = require('path');
+
+const engine = new Liquid({
+  root: path.resolve(__dirname, '../templates/'), 
+  extname: '.liquid'
+});
+
+type VXU_V04_Message = typeof v2_5.messages.VXU_V04_Message.prototype;
+
 export interface HL7V2Message {
   message: string;
 }
@@ -8,12 +23,25 @@ export interface Resource {
 }
 
 export class ConverterService {
-  convert(message: string): Promise<Resource> {
-    const example: Resource = {
-      id: 1,
-      name: message,
-    };
-    return Promise.resolve(example);
+  convert(message: string): Promise<R4.IBundle> {
+    //const parsedMessage = v2_5.parser.parse(message) as VXU_V04_Message;
+    //const pidSegment = parsedMessage.segments.PID.value[0];
+    //const patientName = pidSegment.fields.PID_5;
+
+    const parser = new hl7v2.Parser();
+    const jsonData = parser.parse(message);
+    const pidSegment = jsonData.PID;
+    const patientName = pidSegment["5"];
+
+    const result = engine.renderFileSync('VXU_V04', jsonData);
+
+    try {
+      const bundle: R4.IBundle = JSON.parse(result);
+      return Promise.resolve(bundle);
+    }
+    catch(e) {
+      return Promise.reject(e);
+    }
   }
 }
 

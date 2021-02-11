@@ -21,7 +21,6 @@
     "strictPropertyInitialization":false,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "typeRoots": ["./node_modules/@types"],
     "experimentalDecorators": true
   },
   "include": ["src/**/*.ts"],
