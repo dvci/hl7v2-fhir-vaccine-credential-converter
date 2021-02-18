@@ -28,11 +28,21 @@ Install all package dependencies (one time operation)
 npm install
 ```
 
+## Build
+
+Build lib package. Will need to be repeated with each code update. Currently npm does not support running top level scripts in a monorepo.
+
+```shell
+cd packages/lib
+npm run compile
+```
+
 ## Run It
-#### Run in *development* mode:
+#### Run API in *development* mode:
 Runs the application is development mode. Should not be used in production
 
 ```shell
+cd packages/api
 npm run dev
 ```
 

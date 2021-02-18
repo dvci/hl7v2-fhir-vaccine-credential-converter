@@ -3,11 +3,14 @@
     "id": "bundle-example",
     "type": "batch",
     "entry": [
-        {
-            "resource": {
-                "resourceType": "Patient",
-                "id": "{{PID.5.0.1.1}}"
-            }
-        }
-    ] 
+        {% if PID %}
+        {% include 'PID' with PID %}
+        {% endif %}
+        {% for order in ORDER %}
+            {% if forloop.first == true %}
+                {% if PID %},{% endif %}
+            {% else %},{% endif %}
+            {% include 'RXA' with order.RXA %}
+        {% endfor %}
+    ]
 }        
