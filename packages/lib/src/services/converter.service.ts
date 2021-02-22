@@ -24,7 +24,7 @@ export class ConverterService {
     const parser = new hl7v2.Parser();
     const jsonData = parser.parse(message);
 
-    const result = engine.renderFileSync('VXU_V04', jsonData);
+    const result = engine.renderFileSync(jsonData['MSH']['9']['3'], jsonData);
 
     try {
       const bundle: R4.IBundle = JSON.parse(result);

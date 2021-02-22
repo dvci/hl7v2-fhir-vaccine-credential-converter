@@ -1,7 +1,5 @@
-{
-    "resource": {
-        "resourceType": "Immunization",
-        "occurrenceDateTime": "{{RXA.3.1}}",
-        "vaccineCode" : {% include 'CWE' with RXA.5 %}
-    }
-}
+"occurrenceDateTime": "{{RXA.3.1}}",
+"vaccineCode" : {% include 'CWE' with RXA.5 %}
+{% if RXA.15 %},
+"lotNumber": "{{RXA.15}}"
+{% endif %}

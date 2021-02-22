@@ -1,8 +1,19 @@
 {
-    "resource": {
-        "resourceType": "Patient",
-        "name": {% include 'XPN' with PID.5.0 %},
-        "birthDate": "{{PID.7.1}}",
-        "gender": "{{PID.8}}"
-    }
+    "resourceType": "Patient",
+    "name": {% include 'XPN' with PID.5.0 %}
+    {% if PID.7.1 %},
+    "birthDate": "{{PID.7.1}}"
+    {% endif %}
+    {% case PID.8 %}
+        {% when "M" %},
+        "gender": "male"
+        {% when "F" %},
+        "gender": "female"
+        {% when "A" %},
+        "gender": "other"
+        {% when "O" %},
+        "gender": "other"
+        {% when "U" %},
+        "gender": "unknown"
+    {% endcase %}
 }
