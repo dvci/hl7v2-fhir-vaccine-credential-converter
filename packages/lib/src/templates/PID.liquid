@@ -1,6 +1,6 @@
 {
     "resourceType": "Patient",
-    "name": {% include 'XPN' with PID.5.0 %}
+    "name": [{% include 'XPN' with PID.5.0 %}]
     {% if PID.7.1 %},
     "birthDate": "{{PID.7.1}}"
     {% endif %}
