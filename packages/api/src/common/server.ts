@@ -1,6 +1,9 @@
-import express, { Application, Response as ExResponse, Request as ExRequest } from 'express';
+import express, {
+  Application,
+  Response as ExResponse,
+  Request as ExRequest,
+} from 'express';
 import swaggerUi from 'swagger-ui-express';
-import path from 'path';
 import bodyParser from 'body-parser';
 import http from 'http';
 import os from 'os';
@@ -9,7 +12,7 @@ import l from './logger';
 
 import errorHandler from '../middlewares/error.handler';
 
-import { RegisterRoutes } from "../../generated/routes";
+import { RegisterRoutes } from '../../generated/routes';
 
 const app = express();
 
@@ -17,7 +20,6 @@ export default class ExpressServer {
   private routes: (app: Application) => void;
 
   constructor() {
-    const root = path.normalize(__dirname + '/../..');
     app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(
       bodyParser.urlencoded({
@@ -28,11 +30,15 @@ export default class ExpressServer {
     app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(cookieParser(process.env.SESSION_SECRET));
 
-    app.use("/api-docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-      return res.send(
-        swaggerUi.generateHTML(await import("../../generated/swagger.json"))
-      );
-    });
+    app.use(
+      '/api-docs',
+      swaggerUi.serve,
+      async (_req: ExRequest, res: ExResponse) => {
+        return res.send(
+          swaggerUi.generateHTML(await import('../../generated/swagger.json'))
+        );
+      }
+    );
   }
 
   router(): ExpressServer {

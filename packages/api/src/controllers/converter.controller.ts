@@ -1,7 +1,7 @@
-import { ConverterService, HL7V2Message, Resource } from '@dvci-converter/lib';
-import express from "express";
+import { ConverterService, HL7V2Message } from '@dvci-converter/lib';
+import express from 'express';
 import { Route, Controller, Post, Body, Request } from 'tsoa';
-import { BundleTypeKind} from  '@ahryman40k/ts-fhir-types/lib/R4/Resource'
+import { BundleTypeKind } from '@ahryman40k/ts-fhir-types/lib/R4/Resource';
 
 interface IBundle_EntryAbstraction {
   id?: string;
@@ -38,25 +38,35 @@ interface IBundleAbstraction {
 @Route('/convert')
 export class ConverterController extends Controller {
   @Post('/')
-  public async convert(@Body() message: HL7V2Message): Promise<IBundleAbstraction>  {
+  public async convert(
+    @Body() message: HL7V2Message
+  ): Promise<IBundleAbstraction> {
     const converter = new ConverterService();
-    return converter.convert(message.message).then(r => {
-      this.setStatus(200);
-      return r;
-    }).catch(error => {
-      throw new Error(error);
-    });
+    return converter
+      .convert(message.message)
+      .then((r) => {
+        this.setStatus(200);
+        return r;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }
 
   @Post('/text')
-  public async convertText(@Request() request: express.Request): Promise<IBundleAbstraction>  {
+  public async convertText(
+    @Request() request: express.Request
+  ): Promise<IBundleAbstraction> {
     const converter = new ConverterService();
-    return converter.convert(request.body).then(r => {
-      this.setStatus(200);
-      return r;
-    }).catch(error => {
-      throw new Error(error);
-    });
+    return converter
+      .convert(request.body)
+      .then((r) => {
+        this.setStatus(200);
+        return r;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }
 }
 
