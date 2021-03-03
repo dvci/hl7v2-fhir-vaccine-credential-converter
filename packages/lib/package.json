@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "compile": "npm run clean && tsc --build ./tsconfig.json && copyfiles -u 1 src/templates/** dist/",
-    "lint": "eslint -c .eslintrc.js \"{server, test}/**/*.{js,ts,tsx}\" --quiet",
-    "lint:fix": "eslint -c .eslintrc.js \"{server, test}/**/*.{js,ts,tsx}\" --quiet --fix",
+    "lint": "eslint -c .eslintrc.js \"{src, test}/**/*.{js,ts,tsx}\" --quiet",
+    "lint:fix": "eslint -c .eslintrc.js \"{src, test}/**/*.{js,ts,tsx}\" --quiet --fix",
     "test": "mocha -r ts-node/register 'test/**/*.test.ts' --reporter spec --exit"
   },
   "dependencies": {
@@ -20,11 +20,11 @@
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.25",
-    "@typescript-eslint/eslint-plugin": "^4.14.0",
-    "@typescript-eslint/parser": "^4.14.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
     "chai": "^4.2.0",
     "copyfiles": "^2.4.1",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "mocha": "^8.2.1",

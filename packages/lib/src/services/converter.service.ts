@@ -1,13 +1,11 @@
-import { Liquid, Template } from 'liquidjs';
-import { R4 } from  '@ahryman40k/ts-fhir-types'
-import * as E from "fp-ts/lib/Either";
-
-const hl7v2 = require("@redoxengine/redox-hl7-v2");
-const path = require('path');
+import { Liquid } from 'liquidjs';
+import { R4 } from '@ahryman40k/ts-fhir-types';
+import hl7v2 from '@redoxengine/redox-hl7-v2';
+import path from 'path';
 
 const engine = new Liquid({
-  root: path.resolve(__dirname, '../templates/'), 
-  extname: '.liquid'
+  root: path.resolve(__dirname, '../templates/'),
+  extname: '.liquid',
 });
 
 export interface HL7V2Message {
@@ -29,8 +27,7 @@ export class ConverterService {
     try {
       const bundle: R4.IBundle = JSON.parse(result);
       return Promise.resolve(bundle);
-    }
-    catch(e) {
+    } catch (e) {
       return Promise.reject(e);
     }
   }
