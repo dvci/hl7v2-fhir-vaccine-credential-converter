@@ -1,3 +1,5 @@
+# HL7 v2-to-FHIR vaccine credential converter
+
 ## Quick Start
 
 Get started developing...
@@ -109,3 +111,21 @@ npm run dev:debug
 ```
 npm run test:debug
 ```
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/dvci/hl7v2-fhir-vaccine-credential-converter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/dvci/hl7v2-fhir-vaccine-credential-converter/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+Copyright 2020 The MITRE Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+```
+http://www.apache.org/licenses/LICENSE-2.0
+```
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Code of Conduct
+
+Everyone interacting in the HealthCards project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/dvci/hl7v2-fhir-vaccine-credential-converter/blob/master/CODE_OF_CONDUCT.md).
