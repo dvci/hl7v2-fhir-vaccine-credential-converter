@@ -9,15 +9,13 @@ Get started developing...
 npm install
 
 # package lib
-cd packages/lib
-npm run compile
+npm run --prefix packages/lib compile
 
 # run in development mode
-cd ../api
-npm run dev
+npm run --prefix packages/api dev
 
 # run tests
-npm run test
+npm run --prefix packages/lib test
 ```
 
 ---
@@ -64,11 +62,20 @@ npm run dev:debug
 
 #### Run in *production* mode:
 
-Compiles the application and starts it in production production mode.
+Compiles the application and starts it in production mode.
 
 ```shell
 npm run compile
 npm start
+```
+
+#### Run in Docker:
+
+Creates Docker image and starts it in container.
+
+```shell
+docker build -t dvci-converter .
+docker run --publish 3000:3000 dvci-converter
 ```
 
 ## Test It

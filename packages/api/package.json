@@ -1,9 +1,9 @@
 {
   "name": "@dvci-converter/api",
   "version": "0.0.1",
-  "main": "dist/src/api/index.js",
+  "main": "dist/api/src/index.js",
   "scripts": {
-    "start": "node dist/src/index.js",
+    "start": "node dist/api/src/index.js",
     "clean": "rimraf generated && rimraf dist",
     "compile": "tsoa spec-and-routes && tsc",
     "predev": "tsoa spec-and-routes",
