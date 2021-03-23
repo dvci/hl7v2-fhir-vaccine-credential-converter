@@ -1,0 +1,9 @@
+{
+    "family" : {% include 'FN' with XPN.1 %},
+    "given" : [
+        "{{XPN.2}}"
+        {% if XPN.3.size > 0 %},
+        "{{XPN.3}}"
+        {% endif %}
+    ]
+}

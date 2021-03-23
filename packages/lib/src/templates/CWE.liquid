@@ -1,0 +1,13 @@
+{
+    "coding" : [
+        {
+            {% if CWE.3 %}
+            "system": "{{CWE.3}}"
+            {% endif %}
+            {% if CWE.1 %}
+            {% if CWE.3 %},{% endif %}
+            "code": "{{CWE.1}}"
+            {% endif %}
+        }
+    ]
+}

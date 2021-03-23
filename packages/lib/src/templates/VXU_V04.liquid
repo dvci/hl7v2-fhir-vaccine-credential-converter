@@ -1,0 +1,20 @@
+{
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+        {% if PID %}
+        {
+            "fullUrl" : "resource:Patient",
+            "resource": {% include 'PID' with PID %}
+        }
+        {% endif %}
+        {% for order in ORDER %}
+            {% if forloop.first == true %}
+                {% if PID %},{% endif %}
+            {% else %},{% endif %}
+            {
+                "resource": {% include 'ORC' with order %}
+            }
+        {% endfor %}
+    ]
+}        
