@@ -2,6 +2,7 @@ import { Liquid } from 'liquidjs';
 import { R4 } from '@ahryman40k/ts-fhir-types';
 import hl7v2 from '@redoxengine/redox-hl7-v2';
 import path from 'path';
+import z32 from '../schema/RSP_K11_Z32.json';
 
 const engine = new Liquid({
   root: path.resolve(__dirname, '../templates/'),
@@ -19,7 +20,7 @@ export interface Resource {
 
 export class ConverterService {
   convert(message: string): Promise<R4.IBundle> {
-    const parser = new hl7v2.Parser();
+    const parser = new hl7v2.Parser(z32);
     const jsonData = parser.parse(message);
 
     const result = engine.renderFileSync(jsonData['MSH']['9']['3'], jsonData);
