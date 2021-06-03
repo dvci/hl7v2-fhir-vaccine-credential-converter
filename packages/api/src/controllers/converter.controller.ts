@@ -1,4 +1,8 @@
-import { ConverterService, HL7V2Message } from '@dvci-converter/lib';
+import {
+  ConverterService,
+  HL7V2Message,
+  ConverterError,
+} from '@dvci-converter/lib';
 import express from 'express';
 import { Route, Controller, Post, Body, Request } from 'tsoa';
 import { BundleTypeKind } from '@ahryman40k/ts-fhir-types/lib/R4/Resource';
@@ -34,6 +38,9 @@ interface IBundleAbstraction {
   entry?: IBundle_EntryAbstraction[];
   signature?: any;
 }
+interface CustomError extends Error {
+  status?: number;
+}
 
 @Route('/convert')
 export class ConverterController extends Controller {
@@ -48,8 +55,8 @@ export class ConverterController extends Controller {
         this.setStatus(200);
         return r;
       })
-      .catch((error) => {
-        throw new Error(error);
+      .catch((e) => {
+        throw this.createError(e);
       });
   }
 
@@ -64,9 +71,20 @@ export class ConverterController extends Controller {
         this.setStatus(200);
         return r;
       })
-      .catch((error) => {
-        throw new Error(error);
+      .catch((e) => {
+        throw this.createError(e);
       });
+  }
+
+  private createError(e: ConverterError): CustomError {
+    const error: CustomError = e.error;
+    if (e.type === 'ERR_PARSE') {
+      error.status = 400;
+    } else if (e.type === 'ERR_UNSUPPORTED') {
+      error.status = 422;
+    }
+
+    return error;
   }
 }
 
