@@ -4,7 +4,7 @@ import {
   ConverterError,
 } from '@dvci-converter/lib';
 import express from 'express';
-import { Route, Controller, Post, Body, Request } from 'tsoa';
+import { Route, Controller, Post, Body, Request, Response } from 'tsoa';
 import { BundleTypeKind } from '@ahryman40k/ts-fhir-types/lib/R4/Resource';
 
 interface IBundle_EntryAbstraction {
@@ -38,12 +38,17 @@ interface IBundleAbstraction {
   entry?: IBundle_EntryAbstraction[];
   signature?: any;
 }
-interface CustomError extends Error {
-  status?: number;
+interface CustomError {
+  errors: ErrorMessage[];
+}
+interface ErrorMessage {
+  message: string;
 }
 
 @Route('/convert')
 export class ConverterController extends Controller {
+  @Response<CustomError>(400, 'Message parsing failed')
+  @Response<CustomError>(422, 'Unsupported message and event type')
   @Post('/')
   public async convert(
     @Body() message: HL7V2Message
@@ -60,6 +65,8 @@ export class ConverterController extends Controller {
       });
   }
 
+  @Response<CustomError>(400, 'Message parsing failed')
+  @Response<CustomError>(422, 'Unsupported message and event type')
   @Post('/text')
   public async convertText(
     @Request() request: express.Request
@@ -76,8 +83,8 @@ export class ConverterController extends Controller {
       });
   }
 
-  private createError(e: ConverterError): CustomError {
-    const error: CustomError = e.error;
+  private createError(e: ConverterError): Error & { status?: number } {
+    const error: Error & { status?: number } = e.error;
     if (e.type === 'ERR_PARSE') {
       error.status = 400;
     } else if (e.type === 'ERR_UNSUPPORTED') {
