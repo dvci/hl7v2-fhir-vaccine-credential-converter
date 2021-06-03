@@ -11,7 +11,7 @@
     "dev:debug": "nodemon --exec \"node -r ts-node/register --inspect-brk\" src/index.ts | pino-pretty",
     "lint": "eslint -c .eslintrc.js \"{src, test}/**/*.{js,ts,tsx}\" --quiet",
     "lint:fix": "eslint -c .eslintrc.js \"{src, test}/**/*.{js,ts,tsx}\" --quiet --fix",
-    "test": "mocha -r ts-node/register test/**/*.ts --exit",
+    "test": "mocha -r ts-node/register 'test/**/*.test.ts' --reporter spec --exit",
     "test:debug": "mocha -r ts-node/register --inspect-brk test/**/*.ts --exit"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.22",
     "@types/pino": "^6.3.5",
+    "@types/supertest":"^2.0.11",
     "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
