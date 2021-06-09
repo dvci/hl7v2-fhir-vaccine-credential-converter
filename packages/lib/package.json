@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.34",
-    "@dotbase/hl7-v2-message": "^1.0.1",
     "@redoxengine/redox-hl7-v2": "^1.0.1",
     "liquidjs": "^9.22.1"
   },
