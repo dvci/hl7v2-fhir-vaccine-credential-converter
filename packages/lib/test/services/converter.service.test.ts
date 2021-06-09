@@ -6,15 +6,30 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 import chai from 'chai';
 
 const expect = chai.expect;
-const v2: string = fs.readFileSync(
+const vxu_v04: string = fs.readFileSync(
   path.resolve(__dirname, '../data/vxu_v04.hl7'),
+  'utf8'
+);
+const rsp_k11: string = fs.readFileSync(
+  path.resolve(__dirname, '../data/rsp_k11_z32.hl7'),
   'utf8'
 );
 
 describe('Converter', function () {
   describe('convert', function () {
+    it('converts RSP_K11 message to FHIR bundle', function (done) {
+      converter.convert(rsp_k11).then((r) => {
+        expect(r.resourceType).to.equal('Bundle');
+        expect(r.entry?.length).to.equal(2);
+        expect(r.entry?.[0].fullUrl).to.contain('resource:Patient');
+        expect(r.entry?.[0].resource?.resourceType).to.equal('Patient');
+        expect(r.entry?.[1].resource?.resourceType).to.equal('Immunization');
+        done();
+      });
+    });
+
     it('converts VXU message to FHIR bundle', function (done) {
-      converter.convert(v2).then((r) => {
+      converter.convert(vxu_v04).then((r) => {
         expect(r.resourceType).to.equal('Bundle');
         expect(r.entry?.length).to.equal(2);
         expect(r.entry?.[0].fullUrl).to.contain('resource:Patient');
@@ -25,7 +40,7 @@ describe('Converter', function () {
     });
 
     it('converts PID segment to FHIR patient', async () => {
-      const fhir_data = await converter.convert(v2);
+      const fhir_data = await converter.convert(rsp_k11);
       expect(fhir_data.entry?.[0].resource?.resourceType).to.equal('Patient');
       const patient: R4.IPatient = fhir_data.entry?.[0].resource as R4.IPatient;
       expect(patient.name?.length).to.equal(1);
@@ -38,7 +53,7 @@ describe('Converter', function () {
     });
 
     it('converts ORC/RXA segment to FHIR immunization', async () => {
-      const fhir_data = await converter.convert(v2);
+      const fhir_data = await converter.convert(rsp_k11);
       expect(fhir_data.entry?.[1].resource?.resourceType).to.equal(
         'Immunization'
       );
@@ -50,7 +65,7 @@ describe('Converter', function () {
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;
       expect(vaccineCode.coding?.length).to.equal(1);
       expect(vaccineCode.coding?.[0].system).to.equal('CVX');
-      expect(vaccineCode.coding?.[0].code).to.equal('85');
+      expect(vaccineCode.coding?.[0].code).to.equal('83');
     });
   });
 });
