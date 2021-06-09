@@ -11,11 +11,15 @@ npm install
 # package lib
 npm run --prefix packages/lib compile
 
+# package api
+npm run --prefix packages/api compile
+
 # run in development mode
 npm run --prefix packages/api dev
 
 # run tests
 npm run --prefix packages/lib test
+npm run --prefix packages/api test
 ```
 
 ---
@@ -94,7 +98,7 @@ npm run test:debug
 
 ## Try It
 * Open your browser to [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
-* Invoke the `/api/v1/convert/text` endpoint with the following sample
+* Invoke the `/api/v0.1.0/convert/text` endpoint with the following sample
 
 ```
 MSH|^~\&|^^|MA0000^^|^^|GA0000^^|20111105122535||RSP^K11^RSP_K11|1320521135996.100000002|T|2.5.1|||||||||Z32^CDCPHINVS^^|

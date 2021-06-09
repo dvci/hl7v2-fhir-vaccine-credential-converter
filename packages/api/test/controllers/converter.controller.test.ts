@@ -20,7 +20,7 @@ describe('Converter API', () => {
   describe('Test POST route /api/convert/text', () => {
     it('converts RSP_K11 message to FHIR bundle', (done) => {
       request(Server)
-        .post('/api/v1/convert/text')
+        .post('/api/v0.1.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })
@@ -33,8 +33,9 @@ describe('Converter API', () => {
           const bundle: R4.IBundle = r.body;
           expect(bundle.resourceType).to.equal('Bundle');
           expect(bundle.entry?.length).to.equal(2);
-          expect(bundle.entry?.[0].fullUrl).to.contain('resource:Patient');
+          expect(bundle.entry?.[0].fullUrl).to.contain('resource:0');
           expect(bundle.entry?.[0].resource?.resourceType).to.equal('Patient');
+          expect(bundle.entry?.[1].fullUrl).to.contain('resource:1');
           expect(bundle.entry?.[1].resource?.resourceType).to.equal(
             'Immunization'
           );
@@ -44,7 +45,7 @@ describe('Converter API', () => {
 
     it('status 400 for message parse errors', function (done) {
       request(Server)
-        .post('/api/v1/convert/text')
+        .post('/api/v0.1.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })
@@ -55,7 +56,7 @@ describe('Converter API', () => {
 
     it('status 422 for unsupported message type and event', function (done) {
       request(Server)
-        .post('/api/v1/convert/text')
+        .post('/api/v0.1.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })
