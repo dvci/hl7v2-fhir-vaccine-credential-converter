@@ -4,7 +4,7 @@
     "entry": [
         {% if PID %}
         {
-            "fullUrl" : "resource:Patient",
+            "fullUrl" : "resource:0",
             "resource": {% include 'PID' with PID %}
         }
         {% endif %}
@@ -13,6 +13,7 @@
                 {% if PID %},{% endif %}
             {% else %},{% endif %}
             {
+                "fullUrl" : "resource:{{ forloop.index }}",
                 "resource": {% include 'ORC' with order %}
             }
         {% endfor %}

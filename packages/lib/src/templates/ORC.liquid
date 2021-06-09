@@ -1,7 +1,3 @@
-{
-    "resourceType": "Immunization",
-    "patient" : {
-        "reference" : "resource:Patient"
-    },
-    {% include 'RXA' with ORC.RXA %}
-}       
+{% if ORC.RXA %}
+{% include 'RXA' with ORC.RXA %}
+{% endif %}        

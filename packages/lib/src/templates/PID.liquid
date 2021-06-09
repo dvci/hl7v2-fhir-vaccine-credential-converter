@@ -4,16 +4,4 @@
     {% if PID.7.1 %},
     "birthDate": "{{PID.7.1}}"
     {% endif %}
-    {% case PID.8 %}
-        {% when "M" %},
-        "gender": "male"
-        {% when "F" %},
-        "gender": "female"
-        {% when "A" %},
-        "gender": "other"
-        {% when "O" %},
-        "gender": "other"
-        {% when "U" %},
-        "gender": "unknown"
-    {% endcase %}
 }

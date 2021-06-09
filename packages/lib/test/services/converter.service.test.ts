@@ -18,25 +18,37 @@ const rsp_k11: string = fs.readFileSync(
 describe('Converter', function () {
   describe('convert', function () {
     it('converts RSP_K11 message to FHIR bundle', function (done) {
-      converter.convert(rsp_k11).then((r) => {
-        expect(r.resourceType).to.equal('Bundle');
-        expect(r.entry?.length).to.equal(2);
-        expect(r.entry?.[0].fullUrl).to.contain('resource:Patient');
-        expect(r.entry?.[0].resource?.resourceType).to.equal('Patient');
-        expect(r.entry?.[1].resource?.resourceType).to.equal('Immunization');
-        done();
-      });
+      converter
+        .convert(rsp_k11)
+        .then((r) => {
+          expect(r.resourceType).to.equal('Bundle');
+          expect(r.entry?.length).to.equal(2);
+          expect(r.entry?.[0].fullUrl).to.contain('resource:0');
+          expect(r.entry?.[0].resource?.resourceType).to.equal('Patient');
+          expect(r.entry?.[1].fullUrl).to.contain('resource:1');
+          expect(r.entry?.[1].resource?.resourceType).to.equal('Immunization');
+          done();
+        })
+        .catch(function (err) {
+          done(err);
+        });
     });
 
     it('converts VXU message to FHIR bundle', function (done) {
-      converter.convert(vxu_v04).then((r) => {
-        expect(r.resourceType).to.equal('Bundle');
-        expect(r.entry?.length).to.equal(2);
-        expect(r.entry?.[0].fullUrl).to.contain('resource:Patient');
-        expect(r.entry?.[0].resource?.resourceType).to.equal('Patient');
-        expect(r.entry?.[1].resource?.resourceType).to.equal('Immunization');
-        done();
-      });
+      converter
+        .convert(vxu_v04)
+        .then((r) => {
+          expect(r.resourceType).to.equal('Bundle');
+          expect(r.entry?.length).to.equal(2);
+          expect(r.entry?.[0].fullUrl).to.contain('resource:0');
+          expect(r.entry?.[0].resource?.resourceType).to.equal('Patient');
+          expect(r.entry?.[1].fullUrl).to.contain('resource:1');
+          expect(r.entry?.[1].resource?.resourceType).to.equal('Immunization');
+          done();
+        })
+        .catch(function (err) {
+          done(err);
+        });
     });
 
     it('converts PID segment to FHIR patient', async () => {
@@ -49,7 +61,6 @@ describe('Converter', function () {
       expect(humanName.given?.[0]).to.equal('Johnny');
       expect(humanName.given?.[1]).to.equal('New');
       expect(patient.birthDate).to.equal('20110411');
-      expect(patient.gender).to.equal('male');
     });
 
     it('converts ORC/RXA segment to FHIR immunization', async () => {
@@ -59,7 +70,7 @@ describe('Converter', function () {
       );
       const immunization: R4.IImmunization = fhir_data.entry?.[1]
         .resource as R4.IImmunization;
-      expect(immunization.patient.reference).to.equal('resource:Patient');
+      expect(immunization.patient.reference).to.equal('resource:0');
       expect(immunization.occurrenceDateTime).to.equal('20110415');
       expect(immunization.lotNumber).to.equal('12345');
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;
