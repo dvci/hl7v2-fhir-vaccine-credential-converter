@@ -1,6 +1,6 @@
 {
   "name": "@dvci-converter/api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/api/src/index.js",
   "scripts": {
     "start": "node dist/api/src/index.js",
