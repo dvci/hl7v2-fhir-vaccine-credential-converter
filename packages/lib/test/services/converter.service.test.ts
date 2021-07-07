@@ -71,6 +71,7 @@ describe('Converter', function () {
       const immunization: R4.IImmunization = fhir_data.entry?.[1]
         .resource as R4.IImmunization;
       expect(immunization.patient.reference).to.equal('resource:0');
+      expect(immunization.status).to.equal('completed');
       expect(immunization.occurrenceDateTime).to.equal('20110415');
       expect(immunization.lotNumber).to.equal('12345');
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;

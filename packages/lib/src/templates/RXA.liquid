@@ -1,5 +1,17 @@
 {
     "resourceType": "Immunization",
+    {% case RXA.20 %}
+    {% when "CP" %}
+    "status": "completed",
+    {% when "PA" %}
+    "status": "completed",
+    {% when "RE" %}
+    "status": "not-done",
+    {% when "NA" %}
+    "status": "not-done",
+    {% else %}
+    "status": "completed",
+    {% endcase %}
     "patient" : {
         "reference" : "resource:0"
     },
