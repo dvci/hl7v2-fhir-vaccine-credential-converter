@@ -27,6 +27,9 @@
     {% if RXA.15 %},
     "lotNumber": "{{RXA.15}}"
     {% endif %}
+    {% if RXA.11.4.1 %},
+    "performer": [{"actor": {"display": "{{RXA.11.4.1}}"}}]
+    {% endif %}
     {% if RXA.20 == 'PA' %},
     "isSubpotent": true
     {% endif %}

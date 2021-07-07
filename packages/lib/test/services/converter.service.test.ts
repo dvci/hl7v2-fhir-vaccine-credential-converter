@@ -87,6 +87,9 @@ describe('Converter', function () {
         'http://terminology.hl7.org/CodeSystem/MVX'
       );
       expect(manufacturer.value).to.equal('SKB');
+      const performer: R4.IReference = immunization.performer?.[0]
+        ?.actor as R4.IReference;
+      expect(performer.display).to.equal("CHILDREN'S HOSPITAL");
     });
   });
 });
