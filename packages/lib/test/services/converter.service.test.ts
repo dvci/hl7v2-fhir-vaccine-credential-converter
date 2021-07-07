@@ -75,7 +75,9 @@ describe('Converter', function () {
       expect(immunization.lotNumber).to.equal('12345');
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;
       expect(vaccineCode.coding?.length).to.equal(1);
-      expect(vaccineCode.coding?.[0].system).to.equal('CVX');
+      expect(vaccineCode.coding?.[0].system).to.equal(
+        'http://hl7.org/fhir/sid/cvx'
+      );
       expect(vaccineCode.coding?.[0].code).to.equal('83');
     });
   });
