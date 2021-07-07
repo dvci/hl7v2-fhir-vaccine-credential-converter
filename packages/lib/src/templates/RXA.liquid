@@ -20,4 +20,7 @@
     {% if RXA.15 %},
     "lotNumber": "{{RXA.15}}"
     {% endif %}
+    {% if RXA.20 == 'PA' %},
+    "isSubpotent": true
+    {% endif %}
 }

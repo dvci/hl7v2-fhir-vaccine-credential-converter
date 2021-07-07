@@ -72,6 +72,7 @@ describe('Converter', function () {
         .resource as R4.IImmunization;
       expect(immunization.patient.reference).to.equal('resource:0');
       expect(immunization.status).to.equal('completed');
+      expect(immunization.isSubpotent).to.equal(true);
       expect(immunization.occurrenceDateTime).to.equal('20110415');
       expect(immunization.lotNumber).to.equal('12345');
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;
