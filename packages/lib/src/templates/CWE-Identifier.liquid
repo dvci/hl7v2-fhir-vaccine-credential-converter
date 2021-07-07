@@ -1,0 +1,16 @@
+{
+    "identifier" : {
+        {% if CWE-Identifier.3 %}
+        {% case CWE-Identifier.3 %}
+        {% when "HL70227" %}
+        "system": "http://terminology.hl7.org/CodeSystem/MVX"
+        {% else %}
+        "system": "{{CWE-Identifier.3}}"
+        {% endcase %}
+        {% endif %}
+        {% if CWE-Identifier.1 %}
+        {% if CWE-Identifier.3 %},{% endif %}
+        "value": "{{CWE-Identifier.1}}"
+        {% endif %}
+    }
+}

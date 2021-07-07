@@ -81,6 +81,12 @@ describe('Converter', function () {
         'http://hl7.org/fhir/sid/cvx'
       );
       expect(vaccineCode.coding?.[0].code).to.equal('83');
+      const manufacturer: R4.IIdentifier = immunization.manufacturer
+        ?.identifier as R4.IIdentifier;
+      expect(manufacturer.system).to.equal(
+        'http://terminology.hl7.org/CodeSystem/MVX'
+      );
+      expect(manufacturer.value).to.equal('SKB');
     });
   });
 });

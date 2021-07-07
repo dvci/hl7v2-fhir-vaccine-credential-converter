@@ -21,6 +21,9 @@
     },
     "occurrenceDateTime": "{{RXA.3.1}}",
     "vaccineCode" : {% include 'CWE' with RXA.5 %}
+    {% if RXA.17.first %},
+    "manufacturer" : {% include 'CWE-Identifier' with RXA.17.first %}
+    {% endif %}
     {% if RXA.15 %},
     "lotNumber": "{{RXA.15}}"
     {% endif %}
