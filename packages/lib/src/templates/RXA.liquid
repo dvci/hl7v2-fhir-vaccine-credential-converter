@@ -10,7 +10,11 @@
     {% when "NA" %}
     "status": "not-done",
     {% else %}
+    {% if RXA.21 == 'D' %}
+    "status": "entered-in-error",
+    {% else %}
     "status": "completed",
+    {% endif %}
     {% endcase %}
     "patient" : {
         "reference" : "resource:0"
