@@ -20,7 +20,7 @@ describe('Converter API', () => {
   describe('Test POST route /api/convert/text', () => {
     it('converts RSP_K11 message to FHIR bundle', (done) => {
       request(Server)
-        .post('/api/v0.1.0/convert/text')
+        .post('/api/v0.2.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })
@@ -45,7 +45,7 @@ describe('Converter API', () => {
 
     it('status 400 for message parse errors', function (done) {
       request(Server)
-        .post('/api/v0.1.0/convert/text')
+        .post('/api/v0.2.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })
@@ -56,7 +56,7 @@ describe('Converter API', () => {
 
     it('status 422 for unsupported message type and event', function (done) {
       request(Server)
-        .post('/api/v0.1.0/convert/text')
+        .post('/api/v0.2.0/convert/text')
         .set({
           'Content-Type': 'text/plain',
         })

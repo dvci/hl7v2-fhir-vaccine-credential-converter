@@ -98,7 +98,7 @@ npm run test:debug
 
 ## Try It
 * Open your browser to [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
-* Invoke the `/api/v0.1.0/convert/text` endpoint with the following sample
+* Invoke the `/api/v0.2.0/convert/text` endpoint with the following sample
 
 ```
 MSH|^~\&|^^|MA0000^^|^^|GA0000^^|20111105122535||RSP^K11^RSP_K11|1320521135996.100000002|T|2.5.1|||||||||Z32^CDCPHINVS^^|

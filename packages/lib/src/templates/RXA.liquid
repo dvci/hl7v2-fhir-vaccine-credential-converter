@@ -1,11 +1,36 @@
 {
     "resourceType": "Immunization",
+    {% case RXA.20 %}
+    {% when "CP" %}
+    "status": "completed",
+    {% when "PA" %}
+    "status": "completed",
+    {% when "RE" %}
+    "status": "not-done",
+    {% when "NA" %}
+    "status": "not-done",
+    {% else %}
+    {% if RXA.21 == 'D' %}
+    "status": "entered-in-error",
+    {% else %}
+    "status": "completed",
+    {% endif %}
+    {% endcase %}
     "patient" : {
         "reference" : "resource:0"
     },
     "occurrenceDateTime": "{{RXA.3.1}}",
     "vaccineCode" : {% include 'CWE' with RXA.5 %}
+    {% if RXA.17.first %},
+    "manufacturer" : {% include 'CWE-Identifier' with RXA.17.first %}
+    {% endif %}
     {% if RXA.15 %},
     "lotNumber": "{{RXA.15}}"
+    {% endif %}
+    {% if RXA.11.4.1 %},
+    "performer": [{"actor": {"display": "{{RXA.11.4.1}}"}}]
+    {% endif %}
+    {% if RXA.20 == 'PA' %},
+    "isSubpotent": true
     {% endif %}
 }
