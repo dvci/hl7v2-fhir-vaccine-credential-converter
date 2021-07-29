@@ -2,7 +2,12 @@
     "coding" : [
         {
             {% if CWE.3 %}
+            {% case CWE.3 %}
+            {% when "CVX" %}
+            "system": "http://hl7.org/fhir/sid/cvx"
+            {% else %}
             "system": "{{CWE.3}}"
+            {% endcase %}
             {% endif %}
             {% if CWE.1 %}
             {% if CWE.3 %},{% endif %}

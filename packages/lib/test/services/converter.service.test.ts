@@ -71,12 +71,25 @@ describe('Converter', function () {
       const immunization: R4.IImmunization = fhir_data.entry?.[1]
         .resource as R4.IImmunization;
       expect(immunization.patient.reference).to.equal('resource:0');
+      expect(immunization.status).to.equal('completed');
+      expect(immunization.isSubpotent).to.equal(true);
       expect(immunization.occurrenceDateTime).to.equal('20110415');
       expect(immunization.lotNumber).to.equal('12345');
       const vaccineCode: R4.ICodeableConcept = immunization.vaccineCode;
       expect(vaccineCode.coding?.length).to.equal(1);
-      expect(vaccineCode.coding?.[0].system).to.equal('CVX');
+      expect(vaccineCode.coding?.[0].system).to.equal(
+        'http://hl7.org/fhir/sid/cvx'
+      );
       expect(vaccineCode.coding?.[0].code).to.equal('83');
+      const manufacturer: R4.IIdentifier = immunization.manufacturer
+        ?.identifier as R4.IIdentifier;
+      expect(manufacturer.system).to.equal(
+        'http://terminology.hl7.org/CodeSystem/MVX'
+      );
+      expect(manufacturer.value).to.equal('SKB');
+      const performer: R4.IReference = immunization.performer?.[0]
+        ?.actor as R4.IReference;
+      expect(performer.display).to.equal("CHILDREN'S HOSPITAL");
     });
   });
 });
