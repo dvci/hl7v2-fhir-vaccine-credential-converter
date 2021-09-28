@@ -32,7 +32,7 @@ export class ConverterService {
     try {
       result = engine.renderFileSync(jsonData['MSH']['9']['3'], jsonData);
     } catch (e) {
-      if (e.message.includes('ENOENT: Failed to lookup')) {
+      if ((e as Error).message.includes('ENOENT: Failed to lookup')) {
         return Promise.reject({ type: 'ERR_UNSUPPORTED', error: e });
       }
       return Promise.reject({ type: 'ERR_TRANSLATE', error: e });
